@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+body  
+{  
+    margin: 0;  
+    padding: 0;  
+    background-color:#6abadeba;  
+    font-family: 'Arial';  
+} 
+h2{  
+    text-align: center; 
+    font-size: 30px; 
+    color: #277582;  
+    padding: 10px;  
+}

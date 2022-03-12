@@ -7,9 +7,9 @@ import javax.persistence.Id;
 @Entity
 public class createaccount {
 @Id	
-	@GeneratedValue
+	@GeneratedValue 
 	private int uid;
-	private String uname;
+	private String uname; 
 	private String uemail;
 	private String uphno;
 	private String upass;

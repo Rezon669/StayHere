@@ -66,7 +66,7 @@ public class createaccountcontroller {
 	public String forgotpassword()
 	{
 		//System.out.println(100);
-		return "Forgotpass";
+		return "Forgotpassword";
 		
 		}
 	

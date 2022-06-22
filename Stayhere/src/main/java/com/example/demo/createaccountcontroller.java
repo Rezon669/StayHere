@@ -19,6 +19,7 @@ public class createaccountcontroller {
 	@Autowired
 	createaccountrepo repo1;
 	
+	
 	/*
 	@RequestMapping("/")
 	public String details()

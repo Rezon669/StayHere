@@ -29,6 +29,7 @@ public class PropertyService {
 		this.propertyRepo = propertyRepo;
 		this.userRepo = userRepo;
 	}
+	
 
 	public PropertyDto addProperty(@Validated PropertyDto property) {
 		// Check if the user exists in the database before saving the property

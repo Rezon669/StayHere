@@ -42,7 +42,8 @@ public class UserDto {
 	private String phonenumber;
 
 	@NotNull(message = "Provide the password")
-	@Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
+	//@Size(min = 8, max = 30, message = "Password must be between 8 and 20 characters")
+	@Column(nullable = false, length = 255)
 	private String password;
 
 	@Enumerated(EnumType.STRING) // Stores enum as a String in the database

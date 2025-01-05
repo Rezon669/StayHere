@@ -6,9 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.stayhere.app.model.UserDto;
-@Repository
-public interface UserRepository extends JpaRepository<UserDto, Long>{
 
-	 Optional<UserDto> findByUsernameOrEmail(String username, String email);
+@Repository
+public interface UserRepository extends JpaRepository<UserDto, Long> {
+
+	Optional<UserDto> findByUsernameOrEmail(String username, String email);
+
+	Optional<UserDto> findByUsername(String username);
+
+	Optional<UserDto> findByEmail(String email);
 
 }

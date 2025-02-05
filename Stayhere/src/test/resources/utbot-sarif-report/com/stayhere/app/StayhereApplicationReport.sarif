@@ -1,0 +1,234 @@
+{
+  "$schema" : "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version" : "2.1.0",
+  "runs" : [ {
+    "tool" : {
+      "driver" : {
+        "name" : "UnitTestBot",
+        "organization" : "utbot.org",
+        "version" : "1.0",
+        "rules" : [ {
+          "id" : "utbot.exception.AccessControlException",
+          "name" : "AccessControlException",
+          "shortDescription" : {
+            "text" : "Unexpected AccessControlException detected."
+          },
+          "fullDescription" : {
+            "text" : "Seems like an exception AccessControlException might be thrown."
+          },
+          "help" : {
+            "text" : "https://docs.oracle.com/javase/8/docs/api/java/lang/AccessControlException.html"
+          }
+        } ]
+      }
+    },
+    "results" : [ {
+      "ruleId" : "utbot.exception.AccessControlException",
+      "level" : "error",
+      "message" : {
+        "text" : "                    Unexpected AccessControlException: access denied (\"java.util.PropertyPermission\" \"java.awt.headless\" \"read\").\n                    Test case: `main([XZ, \n\t\n, -3])`\n                    [Generated test for this case](1)"
+      },
+      "locations" : [ {
+        "physicalLocation" : {
+          "artifactLocation" : {
+            "uri" : "src/main/java/com/stayhere/app/StayhereApplication.java",
+            "uriBaseId" : "%SRCROOT%"
+          },
+          "region" : {
+            "startLine" : 12,
+            "startColumn" : 3
+          }
+        }
+      }, {
+        "logicalLocations" : [ {
+          "fullyQualifiedName" : "com.stayhere.app.StayhereApplication"
+        } ]
+      } ],
+      "relatedLocations" : [ {
+        "id" : 1,
+        "physicalLocation" : {
+          "artifactLocation" : {
+            "uri" : "src/test/com/stayhere/app/StayhereApplicationTest.java",
+            "uriBaseId" : "%SRCROOT%"
+          },
+          "region" : {
+            "startLine" : 49,
+            "startColumn" : 5
+          }
+        }
+      } ],
+      "codeFlows" : [ {
+        "threadFlows" : [ {
+          "locations" : [ {
+            "location" : {
+              "message" : {
+                "text" : "StayhereApplicationTest.testMainWithNonEmptyObjectArray(StayhereApplicationTest.java:49)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "src/test/com/stayhere/app/StayhereApplicationTest.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 49,
+                  "startColumn" : 5
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "com.stayhere.app.StayhereApplication.main(StayhereApplication.java:12)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "src/main/java/com/stayhere/app/StayhereApplication.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 12,
+                  "startColumn" : 3
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "org/springframework/boot/SpringApplication.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 1350
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "org/springframework/boot/SpringApplication.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 1361
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "org.springframework.boot.SpringApplication.run(SpringApplication.java:308)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "org/springframework/boot/SpringApplication.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 308
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "org.springframework.boot.SpringApplication.configureHeadlessProperty(SpringApplication.java:444)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "org/springframework/boot/SpringApplication.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 444
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "java.base/java.lang.System.getProperty(System.java:964)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "java/lang/System.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 964
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "java.base/java.lang.SecurityManager.checkPropertyAccess(SecurityManager.java:1160)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "java/lang/SecurityManager.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 1160
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "java.base/java.lang.SecurityManager.checkPermission(SecurityManager.java:416)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "java/lang/SecurityManager.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 416
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "java.base/java.security.AccessController.checkPermission(AccessController.java:1068)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "java/security/AccessController.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 1068
+                }
+              }
+            }
+          }, {
+            "location" : {
+              "message" : {
+                "text" : "java.base/java.security.AccessControlContext.checkPermission(AccessControlContext.java:485)"
+              },
+              "physicalLocation" : {
+                "artifactLocation" : {
+                  "uri" : "java/security/AccessControlContext.java",
+                  "uriBaseId" : "%SRCROOT%"
+                },
+                "region" : {
+                  "startLine" : 485
+                }
+              }
+            }
+          } ]
+        } ]
+      } ]
+    } ]
+  } ]
+}

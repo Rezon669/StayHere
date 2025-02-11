@@ -22,8 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
-import static org.utbot.runtime.utils.java.UtUtils.createInstance;
-import static org.utbot.runtime.utils.java.UtUtils.setField;
+
 
 public final class UserDetailsServiceImplTest {
     @InjectMocks

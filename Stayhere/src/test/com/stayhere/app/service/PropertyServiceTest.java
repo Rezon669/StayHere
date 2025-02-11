@@ -42,16 +42,7 @@ public final class PropertyServiceTest {
 
     ///region SYMBOLIC EXECUTION: ERROR SUITE for method addProperty(com.stayhere.app.model.PropertyDto)
 
-    /**
-     * @utbot.classUnderTest {@link PropertyService}
-     * @utbot.methodUnderTest {@link PropertyService#addProperty(PropertyDto)}
-     * @utbot.throwsException {@link NullPointerException} in: return userRepo.findById(property.getUser().getUserid()).map(user -> {
-     * property.setUser(user);
-     * PropertyDto savedProperty = propertyRepo.save(property);
-     * log.info("Property added successfully for User ID: {}", user.getUserid());
-     * return savedProperty;
-     * }).orElseThrow(() -> new CustomException("Error when adding property details", "No user found with the given ID to map the property"));
-     */
+
     @Test
     @DisplayName("addProperty: return userRepo.findById(property.getUser().getUserid()).map(user -> { property.setUser(user) PropertyDto savedProperty = propertyRepo.save(property) log.info(\"Property added successfully for User ID: {}\", user.getUserid()) return savedProperty }).orElseThrow(() -> new CustomException(\"Error when adding property details\", \"No user found with the given ID to map the property\")) : True -> ThrowNullPointerException")
     public void testAddProperty_ThrowNullPointerException() {

@@ -17,6 +17,8 @@ import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 public final class UserServiceTest {
+
+    //Test class
     @InjectMocks
     private UserService userService;
 
@@ -83,6 +85,7 @@ public final class UserServiceTest {
         assertNotNull(users);
         assertFalse(users.isEmpty());
     }
+
 
     // ✅ Fixed test for deleteUser()
     @Test

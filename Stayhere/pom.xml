@@ -17,6 +17,12 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>utbot-github</id>-->
+<!--			<url>https://jitpack.io</url>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 
 	<dependencies>
 		<!-- Spring Boot Web Starter -->
@@ -45,6 +51,12 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-inline</artifactId>
+			<version>5.2.0</version> <!-- Use the latest version -->
+			<scope>test</scope>
+		</dependency>
 
 		<!-- Spring Boot Validation -->
 		<dependency>
@@ -61,12 +73,26 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.mockito</groupId>
-					<artifactId>mockito-core</artifactId>
-				</exclusion>
-			</exclusions>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.github.UnitTestBot</groupId>-->
+<!--			<artifactId>utbot-framework</artifactId>-->
+<!--			<version>0.8.2</version> &lt;!&ndash; Check for the latest version &ndash;&gt;-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.7.0</version> <!-- Use the latest version -->
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Mockito JUnit Integration -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- Lombok (Optional: to reduce boilerplate code) -->

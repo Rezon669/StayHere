@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
-import static org.utbot.runtime.utils.java.UtUtils.*;
+
 
 public final class PropertyServiceTest {
     @InjectMocks

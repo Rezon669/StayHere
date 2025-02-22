@@ -19,17 +19,15 @@ import com.stayhere.app.service.UserDetailsServiceImpl;
 @Configuration
 public class SecurityConfig {
 
-
 	@Autowired
 	private JwtFilter jwtFilter;
 
 	@SuppressWarnings("removal")
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-		.requestMatchers("/stayhere/api/users/authenticate").permitAll()
-		.requestMatchers("/actuator/**").permitAll()
-				.requestMatchers("/**").hasRole("ADMIN").requestMatchers(HttpMethod.GET, "/**").hasAnyRole()
+		http.csrf().disable().authorizeRequests().requestMatchers("/stayhere/api/users/authenticate").permitAll()
+				.requestMatchers("/actuator/**").permitAll().requestMatchers("/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.GET, "/**").hasAnyRole()
 				.requestMatchers(HttpMethod.GET, "/stayhere/api/properties/**").hasAnyRole("BUYER", "TENANT", "SELLER")
 				.requestMatchers(HttpMethod.POST, "/stayhere/api/properties/**").hasRole("SELLER")
 				.requestMatchers(HttpMethod.DELETE, "/stayhere/api/properties/**").hasRole("SELLER")

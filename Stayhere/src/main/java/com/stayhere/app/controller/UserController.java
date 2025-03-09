@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,27 +52,34 @@ public class UserController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> addUser(@Validated @RequestBody UserDto user) {
+	public ResponseEntity<EntityModel<UserDto>> addUser(@Validated @RequestBody UserDto user) {
 		UserDto addedUser = userService.addUser(user);
 		log.info("User added successfully: {}", user.getUsername());
 		EntityModel<UserDto> userResource = EntityModel.of(addedUser,
 				linkTo(methodOn(UserController.class).getUserById(addedUser.getUserid())).withSelfRel(),
+				linkTo(methodOn(UserController.class).updateUser(addedUser.getUserid(), new UserDto())).withRel("update"),
+				linkTo(methodOn(UserController.class).deleteUser(user.getUserid())).withRel("delete"),
 				linkTo(methodOn(UserController.class).getUsers()).withRel("all-users"));
+		
 		return new ResponseEntity<>(userResource, HttpStatus.CREATED);
 	}
 
 	@GetMapping
-	public ResponseEntity<?> getUsers() {
+	public ResponseEntity<CollectionModel<EntityModel<UserDto>>> getUsers() {
 		List<UserDto> users = userService.getUsers();
 		log.info("Users information fetched successfully");
-		List<EntityModel<UserDto>> userDetails = users.stream()
+		List<EntityModel<UserDto>> usersDetails = users.stream()
 				.map(user -> EntityModel.of(user,
 						linkTo(methodOn(UserController.class).getUserById(user.getUserid())).withSelfRel(),
 						linkTo(methodOn(UserController.class).updateUser(user.getUserid(), null)).withRel("update"),
 						linkTo(methodOn(UserController.class).deleteUser(user.getUserid())).withRel("delete")))
 				.collect(Collectors.toList());
+		
+		CollectionModel<EntityModel<UserDto>> resources = CollectionModel.of(usersDetails,
+	            linkTo(methodOn(UserController.class).getUsers()).withSelfRel());
 
-		return new ResponseEntity<>(userDetails, HttpStatus.OK);
+
+		return new ResponseEntity<>(resources, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
@@ -80,25 +88,25 @@ public class UserController {
 
 		if (user.isPresent()) {
 			log.info("User information fetched successfully");
-			user.get().setPassword(null);
-			EntityModel<java.util.Optional<UserDto>> userDetails = EntityModel.of(user,
-					linkTo(methodOn(UserController.class).updateUser(user.get().getUserid(), null)).withRel("update"),
+			UserDto userDto = user.get();
+		    userDto.setPassword(null);
+			
+			EntityModel<UserDto> userDetails = EntityModel.of(userDto,
+					linkTo(methodOn(UserController.class).updateUser(user.get().getUserid(), new UserDto())).withRel("update"),
 					linkTo(methodOn(UserController.class).deleteUser(user.get().getUserid())).withRel("delete"));
 			return new ResponseEntity<>(userDetails, HttpStatus.OK);
 		} else {
 			log.info("No users found with the given id: {}", userId);
-			return new ResponseEntity<>("No Users are found", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>("No Users are found", HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@DeleteMapping("/{userId}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> deleteUser(@PathVariable() long userId) {
-		UserDto deletedUser = userService.deleteUser(userId);
-		EntityModel<?> userDetails = EntityModel.of(deletedUser,
-				linkTo(methodOn(UserController.class).getUsers()).withRel("all-users"));
+		userService.deleteUser(userId);
 		log.info("User deleted successfully with id: {}", userId);
-		return new ResponseEntity<>(userDetails, HttpStatus.OK);
+		return new ResponseEntity<>("User deleted successfully", HttpStatus.NO_CONTENT);
 	}
 
 	@PutMapping("/{userId}")
@@ -106,6 +114,7 @@ public class UserController {
 		UserDto updatedUser = userService.updateUser(userId, updateuser);
 		log.info("User details are updated successfully");
 		EntityModel<UserDto> userDetails = EntityModel.of(updatedUser,
+				linkTo(methodOn(UserController.class).getUserById(updatedUser.getUserid())).withSelfRel(),
 				linkTo(methodOn(UserController.class).getUserById(updatedUser.getUserid())).withSelfRel(),
 				linkTo(methodOn(UserController.class).deleteUser(updatedUser.getUserid())).withRel("delete"));
 

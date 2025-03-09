@@ -25,7 +25,10 @@ public class SecurityConfig {
 	@SuppressWarnings("removal")
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().requestMatchers("/stayhere/api/users/authenticate").permitAll()
+		http.csrf().disable().authorizeRequests()
+		//.requestMatchers("/stayhere/api/**").permitAll()
+		.requestMatchers("/easybuy/api/**").authenticated()
+		.requestMatchers("/stayhere/api/users/authenticate").permitAll()
 				.requestMatchers("/actuator/**").permitAll().requestMatchers("/**").hasRole("ADMIN")
 				.requestMatchers(HttpMethod.GET, "/**").hasAnyRole()
 				.requestMatchers(HttpMethod.GET, "/stayhere/api/properties/**").hasAnyRole("BUYER", "TENANT", "SELLER")
